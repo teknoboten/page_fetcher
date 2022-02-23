@@ -9,19 +9,9 @@ const source = process.argv.slice(2, 3)[0].toString();
 const dest = process.argv.slice(3, 4)[0].toString();
 
 
-//fs.stat -> is dest valid -> if file exists -> readline -> if y -> request -> if success -> writefile
-//          -> if not -> log error -> end process
-//                          -> if not -> request -> if success -> writefile
-//                                                      -> if n, log error -> end process
-//                                      
-
-//check if dest is valid - if not, log an error and end process
-
+//if dest is invalid
 //if source returns an error or non-200, log an error and end process
-
-//if file exists, prompt to overwrite 
-
-
+//if file exists, prompt to overwrite
 
 
 request(source, (error, response, body) => {
@@ -33,11 +23,7 @@ request(source, (error, response, body) => {
     });
     if (error) throw error;
   });
-
 });
-
-
-
 
 
 
@@ -46,28 +32,7 @@ request(source, (error, response, body) => {
 /*
 
 
-    // if dest, prompt to overwrite -- move this check outside of writefile???
-    // if (dest) {
-    
-    //   //do i create the interface here ????
-
-    //   const rl = readline.createInterface({ input, output });
-
-    //   rl.question(`that file already exists! press 'y' to overwrite`, (answer) => {
-
-    //     //if answer === y, save the file
-    //     //else, exit
-    //     if (answer === '\u0079') {
-
-    //     }
-
-    //   });
-
-    // }
-
-
-
-
+//   const rl = readline.createInterface({ input, output });
 
 node fetcher.js https://leslie-knope-quotes.herokuapp.com/quotes ./nope
 credit  https://github.com/mupraj10/leslie-knope-quotes
