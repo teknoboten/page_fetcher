@@ -22,9 +22,37 @@ const request = require('request');
 const source = process.argv.slice(2, 3)[0];
 const dest = process.argv.slice(3, 4)[0];
 
-// const fetcher = (source, dest) => {
 
-// }
+request(source, (error, response, body) => {
+  // console.error(`error: ${error}`);
+  // console.log(`statusCode: ${response && response.statusCode}`);
+  // console.log(`body: ${body}`);
+
+    // fs.mkdir(dest, () => {
+
+//when fs.mkdir is complete, callback to fs.writeFile
+
+//pass body / error function to write to fs
+      fs.writeFile(body, dest, (error) => {
+        if (error) throw error;
+        console.log(`wrote ${body} to ${dest}`);
+      });
+
+      // console.log(body);
+
+    });
 
 
-// node fetcher.js http://placekitten.com/200/300 ./kittens
+// });
+
+
+
+
+
+
+
+
+
+
+// node fetcher.js https://leslie-knope-quotes.herokuapp.com/quotes ./nope
+//credit  https://github.com/mupraj10/leslie-knope-quotes
