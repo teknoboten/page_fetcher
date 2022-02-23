@@ -1,21 +1,3 @@
-/*
-node fetcher.js http://www.example.edu/ ./index.html
-Downloaded and saved 3261 bytes to ./index.html
-
-Use the request library to make the HTTP request
-Use Node's fs module to write the file
-Use the callback based approach we've been learning so far
-Do not use the pipe function
-Do not use synchronous functions (see warning below)
-
--> edge cases 
-- local path already exists (overwrite w/o prompt)
-
--> stretch
-- prompt y to overwrite, other wise terminate
-
-*/
-
 const fs = require('fs');
 const request = require('request');
 
@@ -25,33 +7,44 @@ const dest = process.argv.slice(3, 4)[0].toString();
 
 request(source, (error, response, body) => {
 
-  // fs.mkdir(dest, (error) => {
-  //   if (error) throw error;
-  // });
+  fs.writeFile(dest, body, (error) => {  
 
-  fs.writeFile(dest, body, (error) => {  //this works but does not make a directory!
+    //if dest, prompt to overwrite 
+    // if (dest){
+    //   console.log('that file already exists!');
+    //   return;
+    // }
+
+
+    
+    fs.stat(dest, (error, stats) => {
+      // console.log(`${body}\n`);
+      // console.log(stats);
+      console.log(`downloaded and saved ${stats.size} bytes to ${dest}:`);
+      
+    });
+
     if (error) throw error;
-    console.log(`wrote ${body} to ${dest}`);
+    
   });
-
-
-  // fs.writeFile(dest, body, (error) => {  //this works but does not make a directory!
-  //   if (error) throw error;
-  //   console.log(`wrote ${body} to ${dest}`);
-  // });
-
-
 
 });
 
 
 
 
-
-
-
-
-
-
 // node fetcher.js https://leslie-knope-quotes.herokuapp.com/quotes ./nope
 //credit  https://github.com/mupraj10/leslie-knope-quotes
+/*
+node fetcher.js http://www.example.edu/ ./index.html
+
+
+
+-> edge cases 
+- local path already exists (overwrite w/o prompt)
+
+-> stretch
+- prompt y to overwrite, other wise terminate
+- refactor dest / source as getRequest() 
+
+*/
