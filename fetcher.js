@@ -19,31 +19,30 @@ Do not use synchronous functions (see warning below)
 const fs = require('fs');
 const request = require('request');
 
-const source = process.argv.slice(2, 3)[0];
-const dest = process.argv.slice(3, 4)[0];
+const source = process.argv.slice(2, 3)[0].toString();
+const dest = process.argv.slice(3, 4)[0].toString();
 
 
 request(source, (error, response, body) => {
-  // console.error(`error: ${error}`);
-  // console.log(`statusCode: ${response && response.statusCode}`);
-  // console.log(`body: ${body}`);
 
-    // fs.mkdir(dest, () => {
+  // fs.mkdir(dest, (error) => {
+  //   if (error) throw error;
+  // });
 
-//when fs.mkdir is complete, callback to fs.writeFile
-
-//pass body / error function to write to fs
-      fs.writeFile(body, dest, (error) => {
-        if (error) throw error;
-        console.log(`wrote ${body} to ${dest}`);
-      });
-
-      // console.log(body);
-
-    });
+  fs.writeFile(dest, body, (error) => {  //this works but does not make a directory!
+    if (error) throw error;
+    console.log(`wrote ${body} to ${dest}`);
+  });
 
 
-// });
+  // fs.writeFile(dest, body, (error) => {  //this works but does not make a directory!
+  //   if (error) throw error;
+  //   console.log(`wrote ${body} to ${dest}`);
+  // });
+
+
+
+});
 
 
 
