@@ -22,6 +22,7 @@ request(source, (error, response, body) => {
       console.log(`downloaded and saved ${stats.size} bytes to ${dest}:`);
     });
     if (error) throw error;
+    
   });
 });
 
